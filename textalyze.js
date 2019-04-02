@@ -29,11 +29,19 @@ function convertStringToArray(word) {
   return [];
 }
 
-module.exports = { itemCounts, convertStringToArray };
+function sanatizeString(string) {
+  if (isString(string)) {
+    return string.toLowerCase();
+  }
+  return '';
+}
+
+module.exports = { itemCounts, convertStringToArray, sanatizeString };
 
 if (require.main === module) {
-  const word = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.';
-  const lettersArray = convertStringToArray(word);
+  const word = 'Lorem Ipsum is siMply dUmmy text of the printing and typeseTting industry.';
+  const stringSanitized = sanatizeString(word);
+  const lettersArray = convertStringToArray(stringSanitized);
   const result = itemCounts(lettersArray);
 
   console.log(`The counts for ${word} are...`);
