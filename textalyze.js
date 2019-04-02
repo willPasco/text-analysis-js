@@ -3,6 +3,8 @@
  * @param {Array} array - The array of items to count
  * @returns {Map} counts - A Map containing the counts of the items in the input array
  */
+const fs = require('fs');
+
 function itemCounts(array) {
   const counts = new Map();
 
@@ -39,14 +41,18 @@ function sanatizeString(string) {
 module.exports = { itemCounts, convertStringToArray, sanatizeString };
 
 if (require.main === module) {
-  const word = 'Lorem Ipsum is siMply dUmmy text of the printing and typeseTting industry.';
-  const stringSanitized = sanatizeString(word);
-  const lettersArray = convertStringToArray(stringSanitized);
-  const result = itemCounts(lettersArray);
+  const path = 'sample_data/moby-dick.txt';
+  fs.readFile(path, (err, data) => {
+    if (err) throw err;
 
-  console.log(`The counts for ${word} are...`);
+    const word = data.toString();
+    const stringSanitized = sanatizeString(word);
+    const lettersArray = convertStringToArray(stringSanitized);
+    const result = itemCounts(lettersArray);
+    console.log(`The counts for ${path} are...`);
 
-  result.forEach((value, key) => {
-    console.log(`${key}  ${value}`);
+    result.forEach((value, key) => {
+      console.log(`${key}  ${value}`);
+    });
   });
 }
