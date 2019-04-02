@@ -1,12 +1,4 @@
 /**
- * This is the base code for v0.1 of our JavaScript text analyzer.
- * Visit https://github.com/jfarmer/text-analysis to see what to do.
- *
- * Send a message in Slack if you're stuck or unsure what to do.  These
- * comments are here to help you, but please delete them as you go along.
- */
-
-/**
  * Given an input Array, returns a Map containing the count of each item in the input.
  * @param {Array} array - The array of items to count
  * @returns {Map} counts - A Map containing the counts of the items in the input array
@@ -23,19 +15,26 @@ function itemCounts(array) {
     counts.set(value, count + 1);
   });
 
-  // Your code here.
-  // Run 'npm test' to see what tests need to pass.
-
   return counts;
 }
 
-const lettersArray = ['a', 'a', 'a', 'b', 'b', 'c'];
-const result = itemCounts(lettersArray);
+function convertStringToArray(word) {
+  if (typeof word === 'string') {
+    return word.split('');
+  }
+  return [];
+}
 
-console.log(`The counts for [${lettersArray}] are...`);
+module.exports = { itemCounts, convertStringToArray };
 
-result.forEach((value, key) => {
-  console.log(`${key}  ${value}`);
-});
+if (require.main === module) {
+  const word = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.';
+  const lettersArray = convertStringToArray(word);
+  const result = itemCounts(lettersArray);
 
-module.exports = { itemCounts };
+  console.log(`The counts for ${word} are...`);
+
+  result.forEach((value, key) => {
+    console.log(`${key}  ${value}`);
+  });
+}
