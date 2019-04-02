@@ -1,4 +1,4 @@
-const { itemCounts } = require('../textalyze');
+const { itemCounts, convertStringToArray } = require('../textalyze');
 
 describe('itemCount', () => {
   test('returns a count of the strings in the array', () => {
@@ -34,5 +34,21 @@ describe('itemCount', () => {
     const expectedOutput = new Map([['a', 2], ['A', 2]]);
 
     expect(itemCounts(input)).toEqual(expectedOutput);
+  });
+});
+
+describe('convertStringToArray', () => {
+  test('converting string to array', () => {
+    const input = 'some string';
+    const expectedOutput = ['s', 'o', 'm', 'e', ' ', 's', 't', 'r', 'i', 'n', 'g'];
+
+    expect(convertStringToArray(input)).toEqual(expectedOutput);
+  });
+
+  test('input is a integer', () => {
+    const input = 1234;
+    const expectedOutput = [];
+
+    expect(convertStringToArray(input)).toEqual(expectedOutput);
   });
 });
