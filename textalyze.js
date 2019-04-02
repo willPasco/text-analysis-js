@@ -41,7 +41,9 @@ function sanatizeString(string) {
 module.exports = { itemCounts, convertStringToArray, sanatizeString };
 
 if (require.main === module) {
-  const path = 'sample_data/moby-dick.txt';
+  const args = process.argv.slice(2);
+  const path = args[0];
+
   fs.readFile(path, (err, data) => {
     if (err) throw err;
 
