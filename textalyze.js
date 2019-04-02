@@ -14,10 +14,28 @@
 function itemCounts(array) {
   const counts = new Map();
 
+  array.forEach((value) => {
+    if (!counts.has(value)) {
+      counts.set(value, 0);
+    }
+
+    const count = counts.get(value);
+    counts.set(value, count + 1);
+  });
+
   // Your code here.
   // Run 'npm test' to see what tests need to pass.
 
   return counts;
 }
+
+const lettersArray = ['a', 'a', 'a', 'b', 'b', 'c'];
+const result = itemCounts(lettersArray);
+
+console.log(`The counts for [${lettersArray}] are...`);
+
+result.forEach((value, key) => {
+  console.log(`${key}  ${value}`);
+});
 
 module.exports = { itemCounts };
