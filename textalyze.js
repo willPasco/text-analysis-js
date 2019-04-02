@@ -18,8 +18,12 @@ function itemCounts(array) {
   return counts;
 }
 
+function isString(string) {
+  return typeof string === 'string';
+}
+
 function convertStringToArray(word) {
-  if (typeof word === 'string') {
+  if (isString(word)) {
     return word.split('');
   }
   return [];
